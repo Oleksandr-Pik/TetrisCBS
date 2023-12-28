@@ -349,3 +349,4 @@ function stopLoop() {
   cancelAnimationFrame(requestId);
   clearInterval(intervalId);
 }
+
