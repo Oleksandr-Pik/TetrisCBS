@@ -4,27 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tetris</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <h1 class="title">Tetris</h1>
+      <h1 class="title">
+        <span class="color-title-red">t</span>
+        <span class="color-title-orange">e</span>
+        <span class="color-title-yellow">t</span>
+        <span class="color-title-green">r</span>
+        <span class="color-title-blue">i</span>
+        <span class="color-title-violet">s</span>
+      </h1>
       <div class="game">
         <div class="tetris"></div>
         <div class="control-panel">
-          <p class="score">
-            Score:
-            <span class="js-score">0</span>
-          </p>
           <p class="score high-score">
             High score:
             <span class="high-score js-high-score">0</span>
           </p>
+          <p class="score">
+            Score:
+            <span class="js-score">0</span>
+          </p>
+          <div class="controls">
+            <button button class="controls-reset btn">Reset</button>
+            <button button class="controls-rotate btn">Rotate</button>
+            <div class="controls-row">
+              <button button class="controls-left btn">Left</button>
+              <button button class="controls-down btn">Down</button>
+              <button button class="controls-right btn">Right</button>
+            </div>
+            <button button class="controls-dropdown btn">Drop down</button>
+          </div>
         </div>
       </div>
     </div>
     <div class="game-over">
-      <button button class="restart">Restart</button>
+      <p class="title">game over</p>
+      <button button class="restart btn">Restart</button>
     </div>
 
     <script type="module" src="main.js"></script>

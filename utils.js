@@ -47,3 +47,9 @@ export const TETROMINOES = {
 
 export const gameOverBlock = document.querySelector('.game-over');
 export const btnResatrt = document.querySelector('.restart');
+export const btnReset = document.querySelector('.controls-reset');
+export const btnRotate = document.querySelector('.controls-rotate');
+export const btnLeft = document.querySelector('.controls-left');
+export const btnDown = document.querySelector('.controls-down');
+export const btnRight = document.querySelector('.controls-right');
+export const btnDropDown = document.querySelector('.controls-dropdown');

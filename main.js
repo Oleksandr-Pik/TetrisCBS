@@ -5,6 +5,12 @@ import {
   TETROMINOES,
   gameOverBlock,
   btnResatrt,
+  btnReset,
+  btnRotate,
+  btnLeft,
+  btnDown,
+  btnRight,
+  btnDropDown
 } from './utils.js';
 
 let playfield,
@@ -35,6 +41,12 @@ function initGame() {
 
 document.addEventListener('keydown', onKeyDown);
 btnResatrt.addEventListener('click', () => initGame());
+btnReset.addEventListener('click', () => initGame());
+btnRotate.addEventListener('click', () => rotateTetromino());
+btnLeft.addEventListener('click', () => moveTetrominoLeft());
+btnDown.addEventListener('click', () => moveTetrominoDown());
+btnRight.addEventListener('click', () => moveTetrominoRight());
+btnDropDown.addEventListener('click', () => dropTetrominoDown());
 
 function togglePauseGame() {
   isPaused = !isPaused;
