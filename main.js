@@ -59,14 +59,16 @@ function togglePauseGame() {
 }
 
 function onKeyDown(event) {
-  if (event.key == 'p') {
+  // console.log('event.key', event.key)
+  // console.log('event.code', event.code)
+  if (event.code == 'KeyP') {
     togglePauseGame();
   }
   if (isPaused) {
     return;
   }
-  switch (event.key) {
-    case ' ':
+  switch (event.code) {
+    case 'Space':
       dropTetrominoDown();
       break;
     case 'ArrowUp':
