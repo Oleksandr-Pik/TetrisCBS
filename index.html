@@ -7,14 +7,24 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="game">
-      <div class="score">Score:&#160<span class="js-score">0</span> </div>
-    
-      <div class="tetris"></div>
+    <div class="container">
+      <h1 class="title">Tetris</h1>
+      <div class="game">
+        <div class="tetris"></div>
+        <div class="control-panel">
+          <p class="score">
+            Score:
+            <span class="js-score">0</span>
+          </p>
+          <p class="score high-score">
+            High score:
+            <span class="high-score js-high-score">0</span>
+          </p>
+        </div>
+      </div>
     </div>
-
     <div class="game-over">
-      <button class="restart">Restart</button>
+      <button button class="restart">Restart</button>
     </div>
 
     <script type="module" src="main.js"></script>

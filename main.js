@@ -8,13 +8,14 @@ import {
 } from './utils.js';
 
 let playfield,
-    tetromino,
-    intervalId,
-    requestId,
-    cells,
-    score = 0,
-    isPaused = false,
-    isGameOver = false;
+  tetromino,
+  intervalId,
+  requestId,
+  cells,
+  score,
+  highScore,
+  isPaused = false,
+  isGameOver = false;
 
 initGame();
 
@@ -26,6 +27,7 @@ function initGame() {
   startLoop();
   cells = document.querySelectorAll('.tetris div');
   score = 0;
+  highScore = localStorage.getItem('highScore') || 0
   updateScore();
 }
 
@@ -195,10 +197,15 @@ function calculateScore(filledRows) {
 
 function updateScore() {
   document.querySelector('.js-score').textContent = score;
+  document.querySelector('.js-high-score').textContent = highScore;
 }
 
 function gameOver() {
   stopLoop();
+  if(score>highScore){
+    highScore = score;
+    localStorage.setItem('highScore', highScore);
+  }
   gameOverBlock.style.display = 'flex';
 }
 
