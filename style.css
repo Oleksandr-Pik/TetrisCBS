@@ -21,9 +21,9 @@ body {
   border-radius: 5px;
   cursor: pointer;
   box-shadow:
-        inset 1px 1px 3px rgba(255, 255, 255, 0),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.451),
-        6px 6px 20px rgba(0, 0, 0, 0.535);
+    inset 1px 1px 3px rgba(255, 255, 255, 0),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.451),
+    6px 6px 20px rgba(0, 0, 0, 0.535);
 }
 
 .game {
@@ -43,9 +43,9 @@ body {
   margin-bottom: 15px;
   padding: 10px;
   box-shadow:
-        inset 1px 1px 3px rgba(255, 255, 255, 0),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.451),
-        6px 6px 20px rgba(0, 0, 0, 0.535);
+    inset 1px 1px 3px rgba(255, 255, 255, 0),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.451),
+    6px 6px 20px rgba(0, 0, 0, 0.535);
 }
 
 .game-over {
@@ -59,20 +59,25 @@ body {
 }
 
 .color-title-red {
-  color: rgba(227, 12, 12, 0.836) ;
+  color: rgba(227, 12, 12, 0.836);
 }
+
 .color-title-orange {
   color: rgb(238, 160, 42);
 }
+
 .color-title-yellow {
   color: rgb(252, 238, 43);
 }
+
 .color-title-green {
   color: rgba(2, 215, 2, 0.868);
 }
+
 .color-title-blue {
   color: rgb(12, 144, 227);
 }
+
 .color-title-violet {
   color: rgba(227, 12, 184, 0.826);
 }
@@ -80,12 +85,12 @@ body {
 .control-panel {
   display: flex;
   flex-direction: column;
-justify-content: space-between;
+  justify-content: space-between;
   padding: 30px 10px;
   box-shadow:
-        inset 1px 1px 3px rgba(255, 255, 255, 0),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.451),
-        6px 6px 20px rgba(0, 0, 0, 0.535);
+    inset 1px 1px 3px rgba(255, 255, 255, 0),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.451),
+    6px 6px 20px rgba(0, 0, 0, 0.535);
 }
 
 .controls {
@@ -103,7 +108,7 @@ justify-content: space-between;
   min-width: 80px;
 
 }
- 
+
 .controls-dropdown {
   width: 250px;
 }
@@ -112,9 +117,16 @@ justify-content: space-between;
   width: 50px;
 }
 
+.info {
+  font-size: 12px;
+  text-align: left;
+}
+
 .score {
   font-size: 30px;
+  text-align: center;
   letter-spacing: 1.5px;
+  margin-bottom: 30px;
 }
 
 .high-score {
@@ -132,19 +144,19 @@ justify-content: space-between;
   grid-template-rows: repeat(20, auto);
 
   box-shadow:
-        inset 1px 1px 3px rgba(255, 255, 255, 0),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.451),
-        6px 6px 20px rgba(0, 0, 0, 0.535);
+    inset 1px 1px 3px rgba(255, 255, 255, 0),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.451),
+    6px 6px 20px rgba(0, 0, 0, 0.535);
 
 }
 
 .tetris div {
   height: min(4vh, 7vw);
   width: min(4vh, 7vw);
-  background-color: rgba(97,75,75,0.205);
+  background-color: rgba(97, 75, 75, 0.205);
   border-radius: 0.3vh;
-  box-shadow: inset 2px 2px 2px rgba(128,128,128, 0.271),
-              inset -4px 4px 4px rgba(22,87,217, 0.271);
+  box-shadow: inset 2px 2px 2px rgba(128, 128, 128, 0.271),
+    inset -4px 4px 4px rgba(22, 87, 217, 0.271);
 }
 
 
@@ -156,20 +168,20 @@ justify-content: space-between;
 .tetris .S,
 .tetris .Z {
   box-shadow:
-  inset 3px 3px 3px rgba(255, 255, 255, 0.213),
-  inset -3px -3px 3px rgba(88, 53, 4, 0.532),
-  12px 12px 24px rgba(0, 0, 0, 0.6);
+    inset 3px 3px 3px rgba(255, 255, 255, 0.213),
+    inset -3px -3px 3px rgba(88, 53, 4, 0.532),
+    12px 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 .tetris .ghost {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: insert 2px 2px 2px rgba(255, 255, 255, 0.2),
-        insert -2px -2px -2px rgba(1, 8, 89, 0.2);
+    insert -2px -2px -2px rgba(1, 8, 89, 0.2);
 }
 
 .tetris .O {
   background-color: rgb(252, 238, 43);
-  
+
 }
 
 .tetris .L {
@@ -217,7 +229,7 @@ justify-content: space-between;
   font-size: 20px;
   font-weight: 700;
   box-shadow:
-        inset 1px 1px 3px rgba(255, 255, 255, 0),
-        inset -4px -4px 8px rgba(0, 0, 0, 0.451),
-        6px 6px 20px rgba(0, 0, 0, 0.535);
+    inset 1px 1px 3px rgba(255, 255, 255, 0),
+    inset -4px -4px 8px rgba(0, 0, 0, 0.451),
+    6px 6px 20px rgba(0, 0, 0, 0.535);
 }
