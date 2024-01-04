@@ -1,37 +1,39 @@
 export const PLAYFIELD_COLUMNS = 10;
 export const PLAYFIELD_ROWS = 20;
+export const NEXT_TETRO_COLUMNS = 6;
+export const NEXT_TETRO_ROWS = 3;
 export const TETROMINO_NAMES = ['O', 'L', 'J', 'T', 'S', 'Z', 'I'];
 export const TETROMINOES = {
-  O: [
+  "O": [
     [1, 1],
     [1, 1],
   ],
-  L: [
+  "L": [
     [0, 0, 1],
     [1, 1, 1],
     [0, 0, 0],
   ],
-  J: [
+  "J": [
     [1, 0, 0],
     [1, 1, 1],
     [0, 0, 0],
   ],
-  T: [
+  "T": [
     [1, 1, 1],
     [0, 1, 0],
     [0, 0, 0],
   ],
-  S: [
+  "S": [
     [0, 1, 1],
     [1, 1, 0],
     [0, 0, 0],
   ],
-  Z: [
+  "Z": [
     [1, 1, 0],
     [0, 1, 1],
     [0, 0, 0],
   ],
-  I: [
+  "I": [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
     [0, 0, 0, 0],

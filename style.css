@@ -135,7 +135,8 @@ body {
   margin-bottom: 2vh;
 }
 
-.tetris {
+.tetris,
+.nextTetro {
   background-color: rgba(11, 11, 146, 0.756);
   padding: 0.5vh;
   border-radius: 0.5vh;
@@ -150,7 +151,15 @@ body {
 
 }
 
-.tetris div {
+.nextTetro {
+  margin: 20px auto 0;
+  width: fit-content;
+  grid-template-columns: repeat(6, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.tetris div,
+.nextTetro div {
   height: min(4vh, 7vw);
   width: min(4vh, 7vw);
   background-color: rgba(97, 75, 75, 0.205);
@@ -158,7 +167,6 @@ body {
   box-shadow: inset 2px 2px 2px rgba(128, 128, 128, 0.271),
     inset -4px 4px 4px rgba(22, 87, 217, 0.271);
 }
-
 
 .tetris .O,
 .tetris .I,
@@ -179,32 +187,32 @@ body {
     insert -2px -2px -2px rgba(1, 8, 89, 0.2);
 }
 
-.tetris .O {
+.tetris .O, .nextTetro .O {
   background-color: rgb(252, 238, 43);
 
 }
 
-.tetris .L {
+.tetris .L, .nextTetro .L {
   background-color: rgb(105, 243, 186);
 }
 
-.tetris .J {
+.tetris .J, .nextTetro .J {
   background-color: rgb(12, 144, 227);
 }
 
-.tetris .T {
+.tetris .T, .nextTetro .T {
   background-color: rgba(227, 12, 12, 0.836);
 }
 
-.tetris .S {
+.tetris .S, .nextTetro .S {
   background-color: rgb(238, 160, 42);
 }
 
-.tetris .Z {
+.tetris .Z, .nextTetro .Z {
   background-color: rgba(227, 12, 184, 0.826);
 }
 
-.tetris .I {
+.tetris .I, .nextTetro .I {
   background-color: rgba(2, 215, 2, 0.868);
 }
 
