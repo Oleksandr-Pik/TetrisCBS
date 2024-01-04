@@ -1,8 +1,6 @@
 import {
   PLAYFIELD_COLUMNS,
   PLAYFIELD_ROWS,
-  NEXT_TETRO_COLUMNS,
-  NEXT_TETRO_ROWS,
   TETROMINO_NAMES,
   TETROMINOES,
   gameOverBlock,
@@ -12,17 +10,16 @@ import {
   btnLeft,
   btnDown,
   btnRight,
-  btnDropDown,
+  btnDropDown
 } from './utils.js';
 
+
+
 let playfield,
-  nexTetroField,
   tetromino,
-  nextTetromino,
   intervalId,
   requestId,
   cells,
-  cellsNext,
   score,
   highScore,
   isPaused = false,
@@ -33,19 +30,16 @@ initGame();
 function initGame() {
   gameOverBlock.style.display = 'none';
   isGameOver = false;
-  isPaused = false;
-  stopLoop();
   generatePlayfield();
-  generateTetromino(true);
-  generateNextField();
+  generateTetromino();
 
-  cells = document.querySelectorAll('.tetris div');
-  cellsNext = document.querySelectorAll('.nextTetro div');
-  score = 0;
-  highScore = localStorage.getItem('highScore') || 0;
-  updateScore();
-  drawTetrominoNext();
+  console.log('tetromino', tetromino);
+
   startLoop();
+  cells = document.querySelectorAll('.tetris div');
+  score = 0;
+  highScore = localStorage.getItem('highScore') || 0
+  updateScore();
 }
 
 // Keydown events
@@ -145,75 +139,38 @@ function generatePlayfield() {
     .map(() => new Array(PLAYFIELD_COLUMNS).fill(0));
 }
 
-function generateNextField() {
-  document.querySelector('.nextTetro').innerHTML = '';
-  for (let i = 0; i < NEXT_TETRO_COLUMNS * NEXT_TETRO_ROWS; i++) {
-    const div = document.createElement('div');
-    document.querySelector('.nextTetro').append(div);
-  }
+function generateTetromino() {
+  const randomIndex = Math.floor(Math.random() * (6 + 1));
 
-  nexTetroField = new Array(NEXT_TETRO_ROWS)
-    .fill()
-    .map(() => new Array(NEXT_TETRO_COLUMNS).fill(0));
-}
-
-function generateTetromino(isFirst) {
-  const nameTetro = getRandomElement(TETROMINO_NAMES);
+  const nameTetro = TETROMINO_NAMES[randomIndex];
   const matrixTetro = TETROMINOES[nameTetro];
 
-  const nameNextTetro = getRandomElement(TETROMINO_NAMES);
-  const matrixNextTetro = TETROMINOES[nameNextTetro];
-
+  const columnTetro =
+    PLAYFIELD_COLUMNS / 2 - Math.floor(matrixTetro.length / 2);
   const rowTetro = -2;
-  const columnTetro = Math.floor(
-    PLAYFIELD_COLUMNS / 2 - matrixTetro.length / 2
-  );
-  const columnNextTetro = Math.floor(
-    PLAYFIELD_COLUMNS / 2 - matrixNextTetro.length / 2
-  );
 
   tetromino = {
     name: nameTetro,
     matrix: matrixTetro,
     row: rowTetro,
     column: columnTetro,
-    // index: randomIndex,
-    ghostRow: rowTetro,
+    index: randomIndex,
     ghostColumn: columnTetro,
-  };
-
-  tetromino = isFirst ? tetromino : nextTetromino;
-
-  nextTetromino = {
-    name: nameNextTetro,
-    matrix: matrixNextTetro,
-    row: rowTetro,
-    column: columnNextTetro,
     ghostRow: rowTetro,
-    ghostColumn: columnTetro,
   };
 }
 
-function getRandomElement(array) {
-  const randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
-}
-
-// function convertPositionIndex(row, column) {
-//   return row * PLAYFIELD_COLUMNS + column;
-// }
-
-function convertPositionIndex(row, column, columnValue) {
-  return row * columnValue + column;
+function convertPositionIndex(row, column) {
+  return row * PLAYFIELD_COLUMNS + column;
 }
 
 // Draw
 
-function drawPlayField(field, cells, numRows, numColumns) {
-  for (let row = 0; row < numRows; row++) {
-    for (let column = 0; column < numColumns; column++) {
-      const name = field[row][column];
-      const cellIndex = convertPositionIndex(row, column, numColumns);
+function drawPlayField() {
+  for (let row = 0; row < PLAYFIELD_ROWS; row++) {
+    for (let column = 0; column < PLAYFIELD_COLUMNS; column++) {
+      const name = playfield[row][column];
+      const cellIndex = convertPositionIndex(row, column);
       cells[cellIndex].classList.add(name);
     }
   }
@@ -228,35 +185,14 @@ function drawTetromino() {
       if (isOutsideTopBoard(row)) {
         continue;
       }
-      if (tetromino.matrix[row][column] == 0) {
+      if (!tetromino.matrix[row][column]) {
         continue;
       }
       const cellIndex = convertPositionIndex(
         tetromino.row + row,
-        tetromino.column + column,
-        PLAYFIELD_COLUMNS
+        tetromino.column + column
       );
       cells[cellIndex].classList.add(name);
-    }
-  }
-}
-
-function drawTetrominoNext() {
-  let extraRow = 0;
-  let extraColumn = 1;
-  const name = nextTetromino.name;
-  const tetrominoMatrixSize = nextTetromino.matrix.length;
-  for (let row = 0; row < tetrominoMatrixSize; row++) {
-    for (let column = 0; column < tetrominoMatrixSize; column++) {
-      if (nextTetromino.matrix[row][column] == 0) {
-        continue;
-      }
-      const cellIndex = convertPositionIndex(
-        row + extraRow,
-        column + extraColumn,
-        NEXT_TETRO_COLUMNS
-      );
-      cellsNext[cellIndex].classList.add(name);
     }
   }
 }
@@ -267,12 +203,8 @@ function drawGhostTetromino() {
     for (let column = 0; column < tetrominoMatrixSize; column++) {
       if (!tetromino.matrix[row][column]) continue;
       if (tetromino.ghostRow + row < 0) continue;
-      const cellIndex = convertPositionIndex(
-        tetromino.ghostRow + row,
-        tetromino.ghostColumn + column,
-        PLAYFIELD_COLUMNS
-      );
-      cells[cellIndex].classList.add('ghost');
+      const cellIndex = convertPositionIndex(tetromino.ghostRow + row, tetromino.ghostColumn + column);
+      cells[cellIndex].classList.add("ghost");
     }
   }
 }
@@ -281,9 +213,8 @@ function draw() {
   cells.forEach(function (cell) {
     cell.removeAttribute('class');
   });
-  drawPlayField(playfield, cells, PLAYFIELD_ROWS, PLAYFIELD_COLUMNS);
+  drawPlayField();
   drawTetromino();
-  drawTetrominoNext();
   drawGhostTetromino();
 }
 
@@ -309,7 +240,7 @@ function updateScore() {
 
 function gameOver() {
   stopLoop();
-  if (score > highScore) {
+  if(score>highScore){
     highScore = score;
     localStorage.setItem('highScore', highScore);
   }
@@ -335,13 +266,7 @@ function placeTetromino() {
   }
   const filledRows = findFilledRows();
   removeFilledRows(filledRows);
-  // generateTetromino();
-  generateTetromino(false);
-  cellsNext.forEach(function (cell) {
-    cell.removeAttribute('class');
-  });
-  drawPlayField(nexTetroField, cellsNext, NEXT_TETRO_ROWS, NEXT_TETRO_COLUMNS);
-  drawTetrominoNext();
+  generateTetromino();
 }
 
 function removeFilledRows(filledRows) {
@@ -367,9 +292,9 @@ function calculateGhostPosition() {
   while (!isValid()) {
     tetromino.row++;
     console.log('tetromino.ghostRow', tetromino.row);
-    console.log('isValid', isValid());
+    console.log('isValid', isValid())
   }
-  tetromino.ghostRow = tetromino.row - 1;
+  tetromino.ghostRow = tetromino.row -1;
   tetromino.ghostColumn = tetromino.column;
   tetromino.row = tetrominoRow;
   console.log('tetromino.ghostColumn', tetromino.ghostColumn);
