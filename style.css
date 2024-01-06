@@ -2,6 +2,11 @@
   margin: 0;
 }
 
+/* button {
+	border: none;
+	outline: none;
+} */
+
 body {
   background: linear-gradient(90deg, rgb(43, 43, 209), rgb(116, 126, 132));
   /* height: 100vh;
@@ -293,4 +298,64 @@ body {
     opacity: 0;
     transform: rotate(90deg) scale(0);
   }
+}
+
+/* ---------- Панель вибору гучності. -------------- */
+.panel_volume{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.volume{
+  font-family: var(--font-roboto);
+  font-size: 1.5rem;
+  font-weight: 400;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  text-shadow: 1.2rem 1.2rem 1rem rgba(0, 0, 0, 0.6);  
+  border-radius: .5rem;
+  padding: .3rem .6rem;
+  gap: .3rem;
+}
+
+.btn-volume{
+  width: 3rem;
+  height: 3rem;
+  padding: .65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(19, 5, 219, 0.671);
+  box-shadow:
+    inset .3rem .3rem .3rem rgba(255, 255, 255, 0.213),
+    inset -.3rem -.3rem .3rem rgba(88, 32, 4, 0.532),
+    1.2rem 1.2rem 2.4rem rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  border-radius: 50%;
+  opacity: .7;
+  transition: all .3s;
+}
+
+.btn-volume:disabled{
+  background: rgba(221, 136, 9, 0.514);
+  opacity: .6;
+  cursor: default;
+}
+
+.btn-volume-img{
+  display: block;
+  width: 100%;
+}
+
+.volume-img{
+  display: block;
+  width: 2.2rem;
+}
+
+.btn-volume:not([disabled]):hover {
+  opacity: 1;
 }

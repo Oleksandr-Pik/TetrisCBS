@@ -1,3 +1,5 @@
+import { Image } from './components/image.js';
+
 import {
   PLAYFIELD_COLUMNS,
   PLAYFIELD_ROWS,
@@ -15,12 +17,37 @@ import {
   btnDropDown,
 } from './utils.js';
 
-const startAudio = new Audio("./sounds/startGame.mp3");
-const gameOverAudio = new Audio("./sounds/gameOver.mp3");
-const rotateAudio = new Audio("./sounds/rotate.mp3");
-const moveAudio = new Audio("./sounds/move.mp3");
-const putAudio = new Audio("./sounds/put.mp3");
-const deleteAudio = new Audio("./sounds/delete.mp3");
+const startAudio = new Audio('./sounds/startGame.mp3');
+const gameOverAudio = new Audio('./sounds/gameOver.mp3');
+const rotateAudio = new Audio('./sounds/rotate.mp3');
+const moveAudio = new Audio('./sounds/move.mp3');
+const putAudio = new Audio('./sounds/put.mp3');
+const deleteAudio = new Audio('./sounds/delete.mp3');
+
+// Змінна кнопок та панелі гучності.
+const decreBtn = document.querySelector('.decre');
+const increBtn = document.querySelector('.incre');
+const volumePanel = document.querySelector('.volume');
+
+// Слухач події клік кнопки зменшити рівень гучності.
+decreBtn.addEventListener('click', ev => {
+  if (!ev.target.disabled) {
+    volumeDecrease();
+    renderVolume();
+    rotateAudio.volume = audioVolume / 10;
+    rotateAudio.play();
+  } else ev.preventDefault();
+});
+
+// Слухач події клік кнопки збільшити рівень гучності.
+increBtn.addEventListener('click', ev => {
+  if (!ev.target.disabled) {
+    volumeIncrease();
+    renderVolume();
+    rotateAudio.volume = audioVolume / 10;
+    rotateAudio.play();
+  } else ev.preventDefault();
+});
 
 let playfield,
   nexTetroField,
@@ -32,6 +59,7 @@ let playfield,
   cellsNext,
   score,
   highScore,
+  audioVolume = 1,
   isPaused = false,
   isGameOver = false;
 
@@ -47,9 +75,12 @@ document.addEventListener('keydown', e => {
 
 // startAudio.play();
 
+renderVolume();
+
 initGame();
 
 function initGame() {
+  startAudio.volume = audioVolume / 10;
   startAudio.play();
   gameOverBlock.style.display = 'none';
   isGameOver = false;
@@ -100,22 +131,27 @@ function onKeyDown(event) {
   }
   switch (event.code) {
     case 'Space':
+      putAudio.volume = audioVolume / 10;
       putAudio.play();
       dropTetrominoDown();
       break;
     case 'ArrowUp':
+      rotateAudio.volume = audioVolume / 10;
       rotateAudio.play();
       rotateTetromino();
       break;
     case 'ArrowDown':
+      moveAudio.volume = audioVolume / 10;
       moveAudio.play();
       moveTetrominoDown();
       break;
     case 'ArrowLeft':
+      moveAudio.volume = audioVolume / 10;
       moveAudio.play();
       moveTetrominoLeft();
       break;
     case 'ArrowRight':
+      moveAudio.volume = audioVolume / 10;
       moveAudio.play();
       moveTetrominoRight();
       break;
@@ -232,6 +268,36 @@ function convertPositionIndex(row, column, columnValue) {
   return row * columnValue + column;
 }
 
+// Рендер панелі гучності.
+function renderVolume() {
+  let volume = `${Image('volume.png', 'volume-img', 'volume')}<span>${
+    audioVolume * 10
+  }%</span>`;
+
+  if (audioVolume === 0) {
+    // decreBtn.disabled = true;
+    volume = `${Image('volume-off.png', 'volume-img', 'volume off')}`;
+  } else decreBtn.disabled = false;
+  if (audioVolume === 10) {
+    // increBtn.disabled = true;
+  } else increBtn.disabled = false;
+  volumePanel.innerHTML = volume;
+}
+
+
+// Метод регулювання гучності.
+function volumeDecrease() {
+  if (audioVolume > 0) {
+    audioVolume -= 1;
+  }
+};
+
+function volumeIncrease() {
+  if (audioVolume < 10) {
+      audioVolume += 1;
+  }
+};
+
 // Draw
 
 function drawPlayField(field, cells, numRows, numColumns) {
@@ -333,6 +399,7 @@ function updateScore() {
 }
 
 function gameOver() {
+  gameOverAudio.volume = audioVolume / 10;
   gameOverAudio.play();
   stopLoop();
   if (score > highScore) {
@@ -372,13 +439,14 @@ function placeTetromino() {
 
 function removeFilledRows(filledRows) {
   if (filledRows.length > 0) {
+    deleteAudio.volume = audioVolume / 10;
     deleteAudio.play();
     score += calculateScore(filledRows);
     updateScore();
   }
   filledRows.forEach(row => {
     dropRowsAbove(row);
-  // cells[row].classList.add("deleted");
+    // cells[row].classList.add("deleted");
   });
 }
 
