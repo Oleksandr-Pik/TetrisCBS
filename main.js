@@ -15,6 +15,13 @@ import {
   btnDropDown,
 } from './utils.js';
 
+const startAudio = new Audio("./sounds/startGame.mp3");
+const gameOverAudio = new Audio("./sounds/gameOver.mp3");
+const rotateAudio = new Audio("./sounds/rotate.mp3");
+const moveAudio = new Audio("./sounds/move.mp3");
+const putAudio = new Audio("./sounds/put.mp3");
+const deleteAudio = new Audio("./sounds/delete.mp3");
+
 let playfield,
   nexTetroField,
   tetromino,
@@ -28,9 +35,22 @@ let playfield,
   isPaused = false,
   isGameOver = false;
 
+document.addEventListener('contextmenu', e => {
+  e.preventDefault();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === ' ') {
+    e.preventDefault();
+  }
+});
+
+// startAudio.play();
+
 initGame();
 
 function initGame() {
+  startAudio.play();
   gameOverBlock.style.display = 'none';
   isGameOver = false;
   isPaused = false;
@@ -80,18 +100,23 @@ function onKeyDown(event) {
   }
   switch (event.code) {
     case 'Space':
+      putAudio.play();
       dropTetrominoDown();
       break;
     case 'ArrowUp':
+      rotateAudio.play();
       rotateTetromino();
       break;
     case 'ArrowDown':
+      moveAudio.play();
       moveTetrominoDown();
       break;
     case 'ArrowLeft':
+      moveAudio.play();
       moveTetrominoLeft();
       break;
     case 'ArrowRight':
+      moveAudio.play();
       moveTetrominoRight();
       break;
   }
@@ -308,6 +333,7 @@ function updateScore() {
 }
 
 function gameOver() {
+  gameOverAudio.play();
   stopLoop();
   if (score > highScore) {
     highScore = score;
@@ -346,11 +372,13 @@ function placeTetromino() {
 
 function removeFilledRows(filledRows) {
   if (filledRows.length > 0) {
+    deleteAudio.play();
     score += calculateScore(filledRows);
     updateScore();
   }
   filledRows.forEach(row => {
     dropRowsAbove(row);
+  // cells[row].classList.add("deleted");
   });
 }
 
