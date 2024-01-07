@@ -34,11 +34,11 @@
               Score:
               <span class="js-score">0</span>
             </p>
-            <p>
+            <!-- <p>
               *Для збільшення швидкості руху фігур, перед початком гри натисни
               декілька раз кнопку 'Reset'. Для повернення стандартної швидкості
               онови сторінку.
-            </p>
+            </p> -->
             <div class="nextTetro"></div>
             <!-- Панель "Гучності". -->
           <div class="panel_volume">
@@ -54,7 +54,11 @@
           </div>
           </div>
           <div class="controls">
-            <button button class="controls-reset btn">Reset</button>
+            <div class="controls-reset-pause">
+              <button button class="controls-reset btn">Reset</button>
+              <button button class="controls-pause btn">Pause</button>
+            </div>
+
             <button button class="controls-rotate btn">Rotate</button>
             <div class="controls-row">
               <button button class="controls-left btn">Left</button>
@@ -63,9 +67,14 @@
             </div>
             <button button class="controls-dropdown btn">Drop down</button>
           </div>
+
+          
         </div>
+        
       </div>
+      
     </div>
+    
     <div class="game-over">
       <p class="title">game over</p>
       <button button class="restart btn">Play again</button>

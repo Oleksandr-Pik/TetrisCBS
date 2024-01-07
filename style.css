@@ -9,15 +9,20 @@
 
 body {
   background: linear-gradient(90deg, rgb(43, 43, 209), rgb(116, 126, 132));
-  /* height: 100vh;
-  width: 100vw; */
+  height: 100vh;
+  width: 100vw;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
-  padding: 20px;
   user-select: none;
+  color: rgb(252, 238, 43);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(252, 238, 43);
+}
+
+.container {
+  /* padding: 20px; */
+  /* max-width: 700px; */
+  
 }
 
 .btn {
@@ -34,7 +39,7 @@ body {
 .game {
   display: flex;
   /* grid-template-columns: 2fr 2fr; */
-  gap: 30px;
+  gap: 15px;
   text-align: center;
 }
 
@@ -46,21 +51,11 @@ body {
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 20px 0;
   box-shadow:
     inset 1px 1px 3px rgba(255, 255, 255, 0),
     inset -4px -4px 8px rgba(0, 0, 0, 0.451),
     6px 6px 20px rgba(0, 0, 0, 0.535);
-}
-
-.game-over {
-  display: flex;
-  flex-direction: column;
-}
-
-.game-over .title {
-  margin-bottom: 50px;
-  box-shadow: none;
 }
 
 .color-title-red {
@@ -88,6 +83,7 @@ body {
 }
 
 .control-panel {
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -99,19 +95,23 @@ body {
 }
 
 .controls {
-  /* margin-top: 200px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  /* width: 100px; */
 }
 
 .controls .btn {
   padding: 10px;
   min-width: 80px;
+}
 
+.controls-reset-pause {
+  display: inline-flex;
+  gap:90px;
+  justify-content: space-between;
+  margin-bottom: 6vh;
 }
 
 .controls-dropdown {
@@ -240,14 +240,22 @@ body {
   transition: all ease-in 0.1s;
 }
 
+
 .game-over {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   background-color: rgb(14, 11, 11, .5);
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: none;
   justify-content: center;
   align-items: center;
+}
+
+.game-over .title {
+  margin-bottom: 50px;
+  box-shadow: none;
 }
 
 .restart {
@@ -323,8 +331,8 @@ body {
 }
 
 .btn-volume{
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: .65rem;
   display: flex;
   align-items: center;

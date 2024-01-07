@@ -10,6 +10,7 @@ import {
   gameOverBlock,
   btnResatrt,
   btnReset,
+  btnPause,
   btnRotate,
   btnLeft,
   btnDown,
@@ -104,6 +105,7 @@ function initGame() {
 document.addEventListener('keydown', onKeyDown);
 btnResatrt.addEventListener('click', () => initGame());
 btnReset.addEventListener('click', () => initGame());
+btnPause.addEventListener('click', ()=> togglePauseGame());
 btnRotate.addEventListener('click', () => rotateTetromino());
 btnLeft.addEventListener('click', () => moveTetrominoLeft());
 btnDown.addEventListener('click', () => moveTetrominoDown());
