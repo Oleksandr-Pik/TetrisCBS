@@ -26,6 +26,7 @@ const rotateAudio = new Audio('./sounds/rotate.mp3');
 const moveAudio = new Audio('./sounds/move.mp3');
 const moveDownAudio = new Audio('./sounds/moveDown.mp3');
 const putAudio = new Audio('./sounds/put.mp3');
+const magicAudio = new Audio('./sounds/magic.mp3');
 const pauseAudio = new Audio('./sounds/pause.mp3');
 const deleteAudio = new Audio('./sounds/delete.mp3');
 
@@ -35,23 +36,23 @@ const increBtn = document.querySelector('.incre');
 const volumePanel = document.querySelector('.volume');
 
 // Слухач події клік кнопки зменшити рівень гучності.
-decreBtn.addEventListener('click', ev => {
-  if (!ev.target.disabled) {
+decreBtn.addEventListener('click', e => {
+  if (!e.target.disabled) {
     volumeDecrease();
     renderVolume();
     rotateAudio.volume = audioVolume / 10;
     rotateAudio.play();
-  } else ev.preventDefault();
+  } else e.preventDefault();
 });
 
 // Слухач події клік кнопки збільшити рівень гучності.
-increBtn.addEventListener('click', ev => {
-  if (!ev.target.disabled) {
+increBtn.addEventListener('click', e => {
+  if (!e.target.disabled) {
     volumeIncrease();
     renderVolume();
     rotateAudio.volume = audioVolume / 10;
     rotateAudio.play();
-  } else ev.preventDefault();
+  } else e.preventDefault();
 });
 
 let playfield,
@@ -86,7 +87,7 @@ initGame();
 
 function initGame() {
   startAudio.volume = audioVolume / 10;
-  startAudio.play();
+  startAudio.play(false);
   gameOverBlock.style.display = 'none';
   isGameOver = false;
   isPaused = false;
@@ -141,8 +142,8 @@ function onKeyDown(evepnt) {
   }
   switch (event.code) {
     case 'Space':
-      putAudio.volume = audioVolume / 10;
-      putAudio.play();
+      // putAudio.volume = audioVolume / 10;
+      // putAudio.play();
       dropTetrominoDown();
       break;
     case 'ArrowUp':
@@ -151,8 +152,8 @@ function onKeyDown(evepnt) {
       rotateTetromino();
       break;
     case 'ArrowDown':
-      // moveAudio.volume = audioVolume / 10;
-      // moveAudio.play();
+      moveAudio.volume = audioVolume / 10;
+      moveAudio.play();
       moveTetrominoDown();
       break;
     case 'ArrowLeft':
@@ -198,6 +199,8 @@ function moveTetrominoRight() {
 }
 
 function dropTetrominoDown() {
+  putAudio.volume = audioVolume / 10;
+  putAudio.play();
   while (!isValid()) {
     tetromino.row++;
   }
@@ -450,11 +453,17 @@ function placeTetromino() {
 
 function removeFilledRows(filledRows) {
   if (filledRows.length > 0) {
-    deleteAudio.volume = audioVolume / 10;
-    deleteAudio.play();
     score += calculateScore(filledRows);
     updateScore();
+    if (filledRows.length === 4) {
+      magicAudio.volume = audioVolume / 10;
+      magicAudio.play();
+    } else {
+      deleteAudio.volume = audioVolume / 10;
+      deleteAudio.play();
+    }
   }
+
   filledRows.forEach(row => {
     dropRowsAbove(row);
     // cells[row].classList.add("deleted");
