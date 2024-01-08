@@ -8,9 +8,11 @@ import {
   TETROMINO_NAMES,
   TETROMINOES,
   gameOverBlock,
+  pauseBlock,
   btnResatrt,
   btnReset,
   btnPause,
+  btnContinue,
   btnRotate,
   btnLeft,
   btnDown,
@@ -22,7 +24,9 @@ const startAudio = new Audio('./sounds/startGame.mp3');
 const gameOverAudio = new Audio('./sounds/gameOver.mp3');
 const rotateAudio = new Audio('./sounds/rotate.mp3');
 const moveAudio = new Audio('./sounds/move.mp3');
+const moveDownAudio = new Audio('./sounds/moveDown.mp3');
 const putAudio = new Audio('./sounds/put.mp3');
+const pauseAudio = new Audio('./sounds/pause.mp3');
 const deleteAudio = new Audio('./sounds/delete.mp3');
 
 // Змінна кнопок та панелі гучності.
@@ -105,7 +109,9 @@ function initGame() {
 document.addEventListener('keydown', onKeyDown);
 btnResatrt.addEventListener('click', () => initGame());
 btnReset.addEventListener('click', () => initGame());
-btnPause.addEventListener('click', ()=> togglePauseGame());
+btnPause.addEventListener('click', () => togglePauseGame());
+btnContinue.addEventListener('click', () => togglePauseGame());
+
 btnRotate.addEventListener('click', () => rotateTetromino());
 btnLeft.addEventListener('click', () => moveTetrominoLeft());
 btnDown.addEventListener('click', () => moveTetrominoDown());
@@ -114,17 +120,19 @@ btnDropDown.addEventListener('click', () => dropTetrominoDown());
 
 function togglePauseGame() {
   isPaused = !isPaused;
+  pauseAudio.volume = audioVolume / 10;
+  pauseAudio.play();
 
   if (isPaused) {
     stopLoop();
+    pauseBlock.style.display = 'flex';
   } else {
     startLoop();
+    pauseBlock.style.display = 'none';
   }
 }
 
-function onKeyDown(event) {
-  // console.log('event.key', event.key)
-  // console.log('event.code', event.code)
+function onKeyDown(evepnt) {
   if (event.code == 'KeyP') {
     togglePauseGame();
   }
@@ -143,8 +151,8 @@ function onKeyDown(event) {
       rotateTetromino();
       break;
     case 'ArrowDown':
-      moveAudio.volume = audioVolume / 10;
-      moveAudio.play();
+      // moveAudio.volume = audioVolume / 10;
+      // moveAudio.play();
       moveTetrominoDown();
       break;
     case 'ArrowLeft':
@@ -163,6 +171,8 @@ function onKeyDown(event) {
 
 function moveTetrominoDown() {
   tetromino.row += 1;
+  moveDownAudio.volume = audioVolume / 10;
+  moveDownAudio.play();
   if (isValid()) {
     tetromino.row -= 1;
     placeTetromino();
@@ -286,19 +296,18 @@ function renderVolume() {
   volumePanel.innerHTML = volume;
 }
 
-
 // Метод регулювання гучності.
 function volumeDecrease() {
   if (audioVolume > 0) {
     audioVolume -= 1;
   }
-};
+}
 
 function volumeIncrease() {
   if (audioVolume < 10) {
-      audioVolume += 1;
+    audioVolume += 1;
   }
-};
+}
 
 // Draw
 

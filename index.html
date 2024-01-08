@@ -41,17 +41,27 @@
             </p> -->
             <div class="nextTetro"></div>
             <!-- Панель "Гучності". -->
-          <div class="panel_volume">
-            <button data-id="decre" class="btn-volume decre" type="button">
-              <img data-id="decre" class="btn-volume-img" src="./image/volume-decrease.png" alt="volume decrease">
-            </button>
-            <div class="volume">
-             <!-- Контет генерується JS -->
+            <div class="panel_volume">
+              <button data-id="decre" class="btn-volume decre" type="button">
+                <img
+                  data-id="decre"
+                  class="btn-volume-img"
+                  src="./image/volume-decrease.png"
+                  alt="volume decrease"
+                />
+              </button>
+              <div class="volume">
+                <!-- Контет генерується JS -->
+              </div>
+              <button data-id="incre" class="btn-volume incre" type="button">
+                <img
+                  data-id="incre"
+                  class="btn-volume-img"
+                  src="./image/volume-increase.png"
+                  alt="volume increase"
+                />
+              </button>
             </div>
-            <button data-id="incre" class="btn-volume incre" type="button">
-              <img data-id="incre" class="btn-volume-img" src="./image/volume-increase.png" alt="volume increase">
-            </button>
-          </div>
           </div>
           <div class="controls">
             <div class="controls-reset-pause">
@@ -67,17 +77,18 @@
             </div>
             <button button class="controls-dropdown btn">Drop down</button>
           </div>
-
-          
         </div>
-        
       </div>
-      
     </div>
-    
+
     <div class="game-over">
       <p class="title">game over</p>
       <button button class="restart btn">Play again</button>
+    </div>
+
+    <div class="pause">
+      <p class="title">paused</p>
+      <button button class="controls-continue btn">Continue the game</button>
     </div>
 
     <script type="module" src="main.js"></script>
