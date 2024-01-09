@@ -441,30 +441,30 @@ function updateSpeed() {
   }
 
   if(score >= 10000 & score < 10500) {
-    speedInterval = 900;
+    speedInterval = 800;
     speed = 1;
   }
   if(score >= 10500 & score < 11000) {
-    speedInterval = 800;
+    speedInterval = 700;
     speed = 2;
   }
   if(score >= 11000 & score < 11500) {
-    speedInterval = 700;
+    speedInterval = 600;
     speed = 3;
   }
-  if(score >= 12000 & score < 12500) {
-    speedInterval = 600;
+  if(score >= 11500 & score < 12500) {
+    speedInterval = 500;
     speed = 4;
   }
-  if(score >= 13000 & score < 13500) {
-    speedInterval = 500;
+  if(score >= 12500 & score < 13500) {
+    speedInterval = 400;
     speed = 5;
   }
-  if(score >= 14000 & score < 14500) {
-    speedInterval = 400;
+  if(score >= 13500 & score < 14500) {
+    speedInterval = 350;
     speed = 6;
   }
-  if(score >= 15000 & score < 15500) {
+  if(score >= 14500 & score < 17000) {
     speedInterval = 300;
     speed = 7;
   }
