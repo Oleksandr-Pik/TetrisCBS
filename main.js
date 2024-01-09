@@ -404,7 +404,7 @@ function calculateScore(filledRows) {
     case 3:
       return 80;
     case 4:
-      return 2000;
+      return 200;
     default:
       return 0;
   }
