@@ -65,6 +65,8 @@ let playfield,
   cellsNext,
   score,
   highScore,
+  speed = 1,
+  speedInterval = 900,
   audioVolume = 1,
   isPaused = false,
   isGameOver = false;
@@ -91,6 +93,7 @@ function initGame() {
   gameOverBlock.style.display = 'none';
   isGameOver = false;
   isPaused = false;
+  speed = 1;
   stopLoop();
   generatePlayfield();
   generateTetromino(true);
@@ -395,21 +398,60 @@ function draw() {
 function calculateScore(filledRows) {
   switch (filledRows.length) {
     case 1:
-      return 10;
+      return 20;
     case 2:
-      return 30;
-    case 3:
       return 50;
+    case 3:
+      return 80;
     case 4:
-      return 100;
+      return 2000;
     default:
       return 0;
   }
 }
 
+function updateSpeed() {
+  if(score < 1000) {
+    speedInterval = 900;
+    speed = 1;
+  }
+  if(score >= 1000 & score < 2000) {
+    speedInterval = 800;
+    speed = 2;
+  }
+  if(score >= 2000 & score < 3000) {
+    speedInterval = 700;
+    speed = 3;
+  }
+  if(score >= 3000 & score < 5000) {
+    speedInterval = 600;
+    speed = 4;
+  }
+  if(score >= 5000 & score < 7000) {
+    speedInterval = 500;
+    speed = 5;
+  }
+  if(score >= 7000 & score < 9000) {
+    speedInterval = 400;
+    speed = 6;
+  }
+  if(score >= 9000 & score < 10000) {
+    speedInterval = 300;
+    speed = 7;
+  }
+  if(score >= 10000 & score < 11000) {
+    speedInterval = 900;
+    speed = 1;
+  }
+   
+  
+}
+
 function updateScore() {
   document.querySelector('.js-score').textContent = score;
   document.querySelector('.js-high-score').textContent = highScore;
+  document.querySelector('.js-speed').textContent = speed;
+
 }
 
 function gameOver() {
@@ -454,6 +496,8 @@ function placeTetromino() {
 function removeFilledRows(filledRows) {
   if (filledRows.length > 0) {
     score += calculateScore(filledRows);
+
+    updateSpeed();
     updateScore();
     if (filledRows.length === 4) {
       magicAudio.volume = audioVolume / 10;
@@ -561,10 +605,10 @@ function hasCollisions(row, column) {
   return playfield[tetromino.row + row]?.[tetromino.column + column];
 }
 
-function startLoop() {
+function   startLoop() {
   intervalId = setInterval(() => {
     requestId = requestAnimationFrame(moveDown);
-  }, 700);
+  }, speedInterval);
 }
 
 function moveDown() {
